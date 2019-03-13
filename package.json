@@ -7,7 +7,7 @@
     "dev": "nodemon ./server",
     "lint": "eslint ./server",
     "test": "nyc mocha ./server/test --timeout 10000 --exit",
-    "cover": "nyc report --reporter=text-lcov coverage.lcov && codecov"
+    "cover": "nyc report --reporter=lcovonly && codecov -t 6bb6a1a7-a62c-4bfd-9f8f-1e0ea935a3a4"
   },
   "repository": {
     "type": "git",
