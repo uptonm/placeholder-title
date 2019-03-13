@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(cors());
 
+app.use('/api', require('./routes/test.routes'));
 app.use('/api', require('./routes/auth.routes'));
 app.use(
   '/user',
