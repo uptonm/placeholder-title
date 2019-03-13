@@ -8,6 +8,7 @@ exports.getUser = async (req, res) => {
   } else {
     res.status(404).send({
       error: {
+        // eslint-disable-next-line quotes
         message: "Couldn't find your profile. Try again later."
       }
     });
@@ -24,6 +25,7 @@ exports.putUser = async (req, res) => {
   } else {
     res.status(404).send({
       error: {
+        // eslint-disable-next-line quotes
         message: "Couldn't find your profile. Try again later."
       }
     });

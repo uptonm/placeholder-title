@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const morgan = require('morgan');
@@ -10,7 +9,6 @@ require('./models/user');
 require('./services/jwtAuth');
 
 const app = express();
-const router = express.Router();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -26,6 +24,7 @@ app.use(
 );
 
 //Handle errors
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.json({ error: err });

@@ -1,7 +1,7 @@
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
-exports.signup = async (req, res, next) => {
+exports.signup = async (req, res) => {
   res.json({
     message: 'Signup successful',
     user: req.user
@@ -9,7 +9,7 @@ exports.signup = async (req, res, next) => {
 };
 
 exports.login = async (req, res, next) => {
-  passport.authenticate('login', async (err, user, info) => {
+  passport.authenticate('login', async (err, user) => {
     try {
       if (err || !user) {
         const error = new Error('An Error occured');
