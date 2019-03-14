@@ -15,3 +15,37 @@ describe('Get Health', () => {
     done();
   });
 });
+
+describe('Create User', () => {
+  it('It should respond without error', done => {
+    chai
+      .request(server)
+      .post('/api/signup')
+      .send({
+        email: 'username',
+        password: 'password'
+      })
+      .end((err, res) => {
+        chai.expect(res).to.have.status(200);
+        chai.expect(res.body).to.contain('Signup Successful');
+      });
+    done();
+  });
+});
+
+describe('Log In', () => {
+  it('It should respond without error', done => {
+    chai
+      .request(server)
+      .post('/api/login')
+      .send({
+        email: 'username',
+        password: 'password'
+      })
+      .end((err, res) => {
+        chai.expect(res).to.have.status(200);
+        chai.expect(res).to.contain('token');
+      });
+    done();
+  });
+});
