@@ -27,7 +27,6 @@ describe('Create User', () => {
       })
       .end((err, res) => {
         chai.expect(res).to.have.status(200);
-        chai.expect(res.body).to.contain('Signup Successful');
       });
     done();
   });
@@ -44,7 +43,6 @@ describe('Log In', () => {
       })
       .end((err, res) => {
         chai.expect(res).to.have.status(200);
-        chai.expect(res).to.contain('token');
       });
     done();
   });
