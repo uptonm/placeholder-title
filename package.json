@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./server",
-    "lint": "eslint ./server",
-    "test": "nyc mocha ./server/test --recursive --timeout 10000 --exit",
+    "lint": "eslint ./server --fix",
+    "test": "mocha ./server/test --recursive --timeout 10000 --exit",
+    "test:cover": "nyc mocha ./server/test --recursive --timeout 10000 --exit",
     "cover": "nyc report --reporter=lcovonly && codecov -t 6bb6a1a7-a62c-4bfd-9f8f-1e0ea935a3a4"
   },
   "repository": {
