@@ -2,8 +2,10 @@ const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const JWTstrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
+const mongoose = require('mongoose');
 
-const UserModel = require('../models/user');
+const UserModel = mongoose.model('users');
+
 // Registering as new user
 passport.use(
   'signup',
@@ -14,7 +16,7 @@ passport.use(
     },
     async (email, password, done) => {
       try {
-        const user = await UserModel.create({ email, password });
+        const user = await new UserModel({ email, password }).save();
         return done(null, user);
       } catch (error) {
         done(error);

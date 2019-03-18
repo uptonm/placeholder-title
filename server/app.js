@@ -7,6 +7,7 @@ require('dotenv').config();
 
 require('./models/user');
 require('./services/jwtService');
+require('./services/oauthService');
 
 const app = express();
 
@@ -16,7 +17,7 @@ app.use(morgan('dev'));
 app.use(cors());
 
 app.use('/api', require('./routes/test.routes'));
-app.use('/api', require('./routes/auth.routes'));
+app.use('/api', require('./routes/jwt.routes'));
 app.use(
   '/user',
   passport.authenticate('jwt', { session: false }),

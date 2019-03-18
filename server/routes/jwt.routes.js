@@ -1,6 +1,6 @@
 const express = require('express');
 const passport = require('passport');
-const actions = require('../controllers/authLogic');
+const actions = require('../controllers/jwtLogic');
 
 const router = express.Router();
 
