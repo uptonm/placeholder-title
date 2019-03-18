@@ -9,7 +9,6 @@ exports.signup = async (req, res) => {
 };
 
 exports.login = async (req, res, next) => {
-  console.log(req.headers.authorization);
   passport.authenticate('login', async (err, user) => {
     try {
       if (err || !user) {
