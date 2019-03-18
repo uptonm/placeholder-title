@@ -6,7 +6,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 require('./models/user');
-require('./services/jwtAuth');
+require('./services/jwtService');
 
 const app = express();
 
