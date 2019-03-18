@@ -10,6 +10,4 @@ COPY ./ ./
 
 RUN npm run lint
 
-RUN npm run test
-
 CMD [ "node", "./server" ]
