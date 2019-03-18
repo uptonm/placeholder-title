@@ -12,12 +12,14 @@ require('./services/oauthService');
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(passport.initialize());
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(cors());
 
 app.use('/api', require('./routes/test.routes'));
 app.use('/api', require('./routes/jwt.routes'));
+app.use('', require('./routes/oauth.routes'));
 app.use(
   '/user',
   passport.authenticate('jwt', { session: false }),
