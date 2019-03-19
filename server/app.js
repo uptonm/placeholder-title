@@ -1,7 +1,7 @@
-const express = require('express');
-const mongoose = require('mongoose');
+const logger = require('./services/loggerService');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 require('dotenv').config();
@@ -10,13 +10,13 @@ require('./models/user');
 require('./services/jwtAuth');
 
 const app = express();
-const router = express.Router();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(cors());
 
+app.use('/api', require('./routes/test.routes'));
 app.use('/api', require('./routes/auth.routes'));
 app.use(
   '/user',
@@ -25,7 +25,11 @@ app.use(
 );
 
 //Handle errors
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
+  if (err) {
+    logger.err(err);
+  }
   res.status(err.status || 500);
   res.json({ error: err });
 });
