@@ -1,6 +1,7 @@
-const express = require('express');
+const logger = require('./services/loggerService');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 require('dotenv').config();
@@ -26,6 +27,9 @@ app.use(
 //Handle errors
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
+  if (err) {
+    logger.err(err);
+  }
   res.status(err.status || 500);
   res.json({ error: err });
 });
