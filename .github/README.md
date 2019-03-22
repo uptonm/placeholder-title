@@ -18,7 +18,7 @@ DB_URI = xxxxx; // (URI to an accessible MongoDB Server)
 JWT_SECRET = xxxxx; // (random string of letters and characters for hashing)
 
 GOOGLE_CLIENT= xxxxx; // This is your client id from Google APIs
-GOOGLE_SECRET=xxxxx' // This is your client secret from Google APIs
+GOOGLE_SECRET= xxxxx; // This is your client secret from Google APIs
 ```
 
 ### MongoDB Setup
