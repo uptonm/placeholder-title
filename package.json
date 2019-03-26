@@ -1,7 +1,7 @@
 {
   "name": "placeholder-title",
   "version": "1.0.0",
-  "description": "",
+  "description": "placeholder-description",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./server",
