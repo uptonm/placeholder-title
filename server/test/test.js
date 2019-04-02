@@ -20,7 +20,7 @@ describe('Create User', () => {
   it('It should respond without error', done => {
     chai
       .request(server)
-      .post('/api/signup')
+      .post('/auth/signup')
       .send({
         email: 'username',
         password: 'password'
@@ -36,14 +36,16 @@ describe('Log In', () => {
   it('It should respond without error', done => {
     chai
       .request(server)
-      .post('/api/login')
+      .post('/auth/login')
       .send({
         email: 'username',
         password: 'password'
       })
       .end((err, res) => {
+        console.log(res.body);
         chai.expect(res).to.have.status(200);
       });
     done();
   });
 });
+
