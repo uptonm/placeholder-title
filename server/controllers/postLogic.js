@@ -43,10 +43,10 @@ exports.postPost = async (req, res) => {
   res.send(response);
 };
 
-validatePost = post => {
-  let errors = [];
+// validatePost = post => {
+//   let errors = [];
 
-  // Validate required fields
+//   // Validate required fields
 
-  // Validate author exists
-};
+//   // Validate author exists
+// };
