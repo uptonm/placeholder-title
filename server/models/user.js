@@ -13,7 +13,11 @@ const UserSchema = new Schema({
     required: true
   },
   first: String,
-  last: String
+  last: String,
+  posts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post'
+  }]
 });
 
 UserSchema.pre('save', async function(next) {
@@ -34,6 +38,6 @@ UserSchema.methods.isValidPassword = async function(password) {
   return compare;
 };
 
-const UserModel = mongoose.model('users', UserSchema);
+const UserModel = mongoose.model('User', UserSchema, 'users');
 
 module.exports = UserModel;

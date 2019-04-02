@@ -18,6 +18,9 @@ mongoose.connect(
   }
 );
 
+require('./models/user');
+require('./models/post');
+
 app.listen(process.env.PORT || 8000, () => {
   return log.msg(
     `Server listening on port ${colors.blue(process.env.PORT || 8000)}`
