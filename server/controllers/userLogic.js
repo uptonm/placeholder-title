@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const user = mongoose.model('User');
 
 exports.getUser = async (req, res) => {
-  const exists = await user.findOne({ email: req.user.email });
+  const exists = await user.findById(req.user._id).populate('posts');
   if (exists) {
     res.status(200).send(exists);
   } else {
@@ -14,7 +14,6 @@ exports.getUser = async (req, res) => {
     });
   }
 };
-
 exports.putUser = async (req, res) => {
   const exists = await user.findOne({ email: req.user.email });
   if (exists) {
@@ -31,6 +30,18 @@ exports.putUser = async (req, res) => {
         // eslint-disable-next-line quotes
         message: "Couldn't find your profile. Try again later."
       }
+    });
+  }
+};
+exports.deleteUser = async (req, res) => {
+  const exists = await user.findOne({email: req.user.email});
+  if (exists) {
+    await user.findByIdAndDelete(exists._id, (error) => {
+      if (error) throw error;
+      return res.send({
+        user: exists._id,
+        message: 'Deleted'
+      });
     });
   }
 };
