@@ -7,8 +7,6 @@ const helmet = require('helmet');
 const cors = require('cors');
 require('dotenv').config();
 
-require('./models/user');
-require('./models/post');
 require('./services/jwtAuth');
 
 const app = express();
