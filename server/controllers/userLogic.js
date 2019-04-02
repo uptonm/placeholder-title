@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const user = mongoose.model('users');
+const user = mongoose.model('User');
 
 exports.getUser = async (req, res) => {
   const exists = await user.findOne({ email: req.user.email });
@@ -18,9 +18,12 @@ exports.getUser = async (req, res) => {
 exports.putUser = async (req, res) => {
   const exists = await user.findOne({ email: req.user.email });
   if (exists) {
-    await user.findByIdAndUpdate(exists._id, req.body, (error, response) => {
+    await user.findByIdAndUpdate(exists._id, req.body, (error) => {
       if (error) return res.send(error);
-      return res.send(response);
+      return res.send({
+        user: exists._id,
+        update: req.body
+      });
     });
   } else {
     res.status(404).send({
