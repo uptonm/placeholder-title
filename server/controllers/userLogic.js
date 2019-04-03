@@ -95,7 +95,10 @@ exports.followUser = async (req, res) => {
     });
   }
   // Check if this user is already following
-  if (userExists.following.length > 0 && !userExists.following.includes(req.body.id)) {
+  let alreadyFollowing = userExists.following.some(id => {
+    return id.equals(req.body.id);
+  });
+  if (alreadyFollowing) {
     return res.status(400).send({
       error: {
         status: 400,
@@ -127,4 +130,52 @@ exports.followUser = async (req, res) => {
       message: `User ${req.body.id} followed`
     }
   });
+};
+exports.unfollowUser = async (req, res) => {
+  // confirm this user exists
+  let userExists = await user.findById(req.user._id);
+  if (!userExists) {
+    return res.status(404).send({
+      error: {
+        status: 404,
+        // eslint-disable-next-line quotes
+        message: "Couldn't find your profile. Try again later."
+      }
+    });
+  }
+  // Confirm that request contains id field
+  if (!req.body.id || req.body.length <= 0) {
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: 'This route requires an id field'
+      }
+    });
+  }
+  // Check if this user is already following
+  if (userExists.following.length > 0 && !userExists.following.includes(req.body.id)) {
+    return res.status(400).send({
+      error: {
+        status: 400,
+        message: 'User is not followed'
+      }
+    });
+  }
+  // Check if user to unfollow exists
+  let userToFollow = await user.findById(req.body.id);
+  if (!userToFollow) {
+    return res.status(404).send({
+      error: {
+        status: 404,
+        // eslint-disable-next-line quotes
+        message: "Couldn't find your profile. Try again later."
+      }
+    });
+  }
+
+  // confirm user is following user to unfollow
+
+  // remove this user from user to unfollow's followers
+
+  // remove user to unfollow from this user's following
 };
