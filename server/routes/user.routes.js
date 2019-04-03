@@ -9,4 +9,7 @@ router.get('/user', actions.getUser);
 router.put('/user', actions.putUser);
 router.delete('/user', actions.deleteUser);
 
+router.get('/user/followers', actions.getFollowers);
+router.get('/user/following', actions.getFollowing);
+
 module.exports = router;

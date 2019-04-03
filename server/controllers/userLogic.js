@@ -60,7 +60,7 @@ exports.getFollowers = async (req, res) => {
   }
 };
 
-exports.getFollowers = async (req, res) => {
+exports.getFollowing = async (req, res) => {
   const exists = await user.findById(req.user._id).populate('following');
   if (exists) {
     res.status(200).send(exists.following || []); // Send followers or empty array if none found
