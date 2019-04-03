@@ -45,3 +45,31 @@ exports.deleteUser = async (req, res) => {
     });
   }
 };
+
+exports.getFollowers = async (req, res) => {
+  const exists = await user.findById(req.user._id).populate('followers');
+  if (exists) {
+    res.status(200).send(exists.followers || []); // Send followers or empty array if none found
+  } else {
+    res.status(404).send({
+      error: {
+        // eslint-disable-next-line quotes
+        message: "Couldn't find your profile. Try again later."
+      }
+    });
+  }
+};
+
+exports.getFollowers = async (req, res) => {
+  const exists = await user.findById(req.user._id).populate('following');
+  if (exists) {
+    res.status(200).send(exists.following || []); // Send followers or empty array if none found
+  } else {
+    res.status(404).send({
+      error: {
+        // eslint-disable-next-line quotes
+        message: "Couldn't find your profile. Try again later."
+      }
+    });
+  }
+};
