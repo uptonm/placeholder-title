@@ -5,7 +5,10 @@ const User = mongoose.model('User');
 exports.getPost = async (req, res) => {
   let response;
   if (req.params.id) {
-    response = await Post.findById(req.params.id).populate({ path: 'author', select: ['email', 'first', 'last'] });
+    response = await Post.findById(req.params.id).populate({
+      path: 'author',
+      select: ['email', 'first', 'last']
+    });
   } else {
     response = await Post.find({}).populate({ path: 'author', select: ['email', 'first', 'last'] });
   }
@@ -42,11 +45,3 @@ exports.postPost = async (req, res) => {
 
   res.send(response);
 };
-
-// validatePost = post => {
-//   let errors = [];
-
-//   // Validate required fields
-
-//   // Validate author exists
-// };
