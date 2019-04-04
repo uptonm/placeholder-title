@@ -1,7 +1,17 @@
-# placeholder-title
+<h2 align="center">placeholder-title</h2>
+<p align="center">
+  <a href="https://codecov.io/gh/uptonm/placeholder-title">
+    <img src="https://codecov.io/gh/uptonm/placeholder-title/branch/master/graph/badge.svg" />
+  </a>
+  <a href="https://travis-ci.org/uptonm/placeholder-title">
+    <img src="https://travis-ci.org/uptonm/placeholder-title.svg?branch=master">
+  </a>
+  <a href="https://greenkeeper.io/">
+    <img src="https://badges.greenkeeper.io/uptonm/placeholder-title.svg">
+  </a>
+  <br/>
+</p>
 
-[![codecov](https://codecov.io/gh/uptonm/placeholder-title/branch/master/graph/badge.svg)](https://codecov.io/gh/uptonm/placeholder-title)
-[![Build Status](https://travis-ci.org/uptonm/placeholder-title.svg?branch=master)](https://travis-ci.org/uptonm/placeholder-title) [![Greenkeeper badge](https://badges.greenkeeper.io/uptonm/placeholder-title.svg)](https://greenkeeper.io/)
 
 ## Development Setup
 
