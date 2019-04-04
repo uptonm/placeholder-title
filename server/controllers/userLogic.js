@@ -153,17 +153,20 @@ exports.unfollowUser = async (req, res) => {
     });
   }
   // Check if this user is already following
-  if (userExists.following.length > 0 && !userExists.following.includes(req.body.id)) {
+  let isFollowing = userExists.following.some(id => {
+    return id.equals(req.body.id);
+  });
+  if (!isFollowing) {
     return res.status(400).send({
       error: {
         status: 400,
-        message: 'User is not followed'
+        message: 'You are not following this user'
       }
     });
   }
   // Check if user to unfollow exists
-  let userToFollow = await user.findById(req.body.id);
-  if (!userToFollow) {
+  let userToUnfollow = await user.findById(req.body.id);
+  if (!userToUnfollow) {
     return res.status(404).send({
       error: {
         status: 404,
@@ -172,10 +175,30 @@ exports.unfollowUser = async (req, res) => {
       }
     });
   }
+  // Find index for each user to remove from followers/following
+  let followerIndex = -1;
+  userToUnfollow.followers.map((id, i) => {
+    if (id.equals(req.user._id)) {
+      followerIndex = i;
+    }
+  });
 
-  // confirm user is following user to unfollow
+  let followingIndex = -1;
+  userExists.followers.map((id, i) => {
+    if (id.equals(req.body.id)) {
+      followingIndex = i;
+    }
+  });
 
   // remove this user from user to unfollow's followers
-
+  await user.findByIdAndUpdate(userToUnfollow._id, { $pull: { followers: req.user._id } });
   // remove user to unfollow from this user's following
+  await user.findByIdAndUpdate(userExists._id, { $pull: { following: req.body.id } });
+
+  res.send({
+    success: {
+      status: 200,
+      message: `User ${req.body.id} unfollowed`
+    }
+  });
 };
