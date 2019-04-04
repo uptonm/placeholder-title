@@ -9,6 +9,9 @@
   <a href="https://greenkeeper.io/">
     <img src="https://badges.greenkeeper.io/uptonm/placeholder-title.svg">
   </a>
+  <a href="https://github.com/prettier/prettier">
+   <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg" />
+  </a>
   <br/>
 </p>
 
