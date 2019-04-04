@@ -42,10 +42,8 @@ describe('Log In', () => {
         password: 'password'
       })
       .end((err, res) => {
-        console.log(res.body);
         chai.expect(res).to.have.status(200);
       });
     done();
   });
 });
-
