@@ -175,21 +175,6 @@ exports.unfollowUser = async (req, res) => {
       }
     });
   }
-  // Find index for each user to remove from followers/following
-  let followerIndex = -1;
-  userToUnfollow.followers.map((id, i) => {
-    if (id.equals(req.user._id)) {
-      followerIndex = i;
-    }
-  });
-
-  let followingIndex = -1;
-  userExists.followers.map((id, i) => {
-    if (id.equals(req.body.id)) {
-      followingIndex = i;
-    }
-  });
-
   // remove this user from user to unfollow's followers
   await user.findByIdAndUpdate(userToUnfollow._id, { $pull: { followers: req.user._id } });
   // remove user to unfollow from this user's following

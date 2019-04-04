@@ -11,6 +11,7 @@ router.delete('/user', actions.deleteUser);
 
 router.get('/user/followers', actions.getFollowers);
 router.get('/user/following', actions.getFollowing);
+
 router.put('/user/following', actions.followUser);
 router.delete('/user/following', actions.unfollowUser);
 
