@@ -3,10 +3,13 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const express = require('express');
 const morgan = require('morgan');
+const helmet = require('helmet');
 const cors = require('cors');
 require('dotenv').config();
 
+
 require('./models/user');
+require('./models/post');
 require('./services/jwtAuth');
 
 const app = express();
@@ -14,14 +17,17 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
+app.use(helmet());
 app.use(cors());
 
 app.use('/api', require('./routes/test.routes'));
-app.use('/api', require('./routes/auth.routes'));
+
+app.use('/auth', require('./routes/auth.routes'));
+app.use('/api', passport.authenticate('jwt', { session: false }), require('./routes/user.routes'));
 app.use(
-  '/user',
+  '/api',
   passport.authenticate('jwt', { session: false }),
-  require('./routes/secure.routes')
+  require('./routes/post.routes')
 );
 
 //Handle errors

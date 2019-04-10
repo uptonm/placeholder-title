@@ -13,7 +13,19 @@ const UserSchema = new Schema({
     required: true
   },
   first: String,
-  last: String
+  last: String,
+  posts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post'
+  }],
+  following: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
+  followers: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }]
 });
 
 UserSchema.pre('save', async function(next) {
@@ -22,6 +34,15 @@ UserSchema.pre('save', async function(next) {
   const hash = await bcrypt.hash(this.password, 1);
   //Replace the plain text password with the hash and then store it
   this.password = hash;
+  next();
+});
+
+UserSchema.pre('remove', async function(next) {
+  // On User Deleteing profile we should aggregate through the Post collection and delete their posts
+  const Post = mongoose.model('Post');
+  await this.posts.map(async post => {
+    await Post.findByIdAndDelete(post._id);
+  });
   next();
 });
 
@@ -34,6 +55,6 @@ UserSchema.methods.isValidPassword = async function(password) {
   return compare;
 };
 
-const UserModel = mongoose.model('users', UserSchema);
+const UserModel = mongoose.model('User', UserSchema, 'users');
 
 module.exports = UserModel;
