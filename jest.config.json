@@ -1,5 +1,6 @@
 {
   "testMatch": ["**/test/**/*.js"],
   "rootDir": "./server",
+  "coverageDirectory": "./coverage/",
   "collectCoverage": true
 }
