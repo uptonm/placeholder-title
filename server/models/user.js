@@ -14,18 +14,24 @@ const UserSchema = new Schema({
   },
   first: String,
   last: String,
-  posts: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Post'
-  }],
-  following: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }],
-  followers: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }]
+  posts: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Post'
+    }
+  ],
+  following: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
+  followers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ]
 });
 
 UserSchema.pre('save', async function(next) {
@@ -55,6 +61,6 @@ UserSchema.methods.isValidPassword = async function(password) {
   return compare;
 };
 
-const UserModel = mongoose.model('User', UserSchema, 'users');
+const UserModel = mongoose.model('User', UserSchema);
 
 module.exports = UserModel;
