@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const { LocationSchema } = require('./location');
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
@@ -15,11 +16,7 @@ const UserSchema = new Schema({
   first: String,
   last: String,
   bio: String,
-  location: {
-    city: String,
-    state: String,
-    country: String
-  },
+  location: LocationSchema,
   education: String,
   avatar: String,
   username: String,
