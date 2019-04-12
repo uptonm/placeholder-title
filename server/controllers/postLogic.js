@@ -54,11 +54,3 @@ exports.postPost = async (req, res) => {
 
   res.send(response);
 };
-
-// validatePost = post => {
-//   let errors = [];
-
-//   // Validate required fields
-
-//   // Validate author exists
-// };

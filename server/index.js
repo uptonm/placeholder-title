@@ -14,12 +14,16 @@ mongoose.connect(
     if (err) {
       return log.err(err);
     }
-    return log.msg(`Connected to MongoDB on port ${colors.blue(27017)}`);
+    if (process.env.NODE_ENV !== 'test') {
+      return log.msg(`Connected to MongoDB on port ${colors.blue(27017)}`);
+    }
   }
 );
 
 app.listen(process.env.PORT || 8000, () => {
-  return log.msg(
-    `Server listening on port ${colors.blue(process.env.PORT || 8000)}`
-  );
+  if (process.env.NODE_ENV !== 'test') {
+    return log.msg(`Server listening on port ${colors.blue(process.env.PORT || 8000)}`);
+  }
 });
+
+module.exports = app;
