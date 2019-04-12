@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
-const user = mongoose.model('User');
+const User = mongoose.model('User');
+const Location = mongoose.model('Location');
 
 exports.getUser = async (req, res) => {
-  const exists = await user.findById(req.user._id).populate('posts');
+  const exists = await User.findById(req.user._id).populate('posts');
   if (exists) {
     res.status(200).send(exists);
   } else {
@@ -15,9 +16,14 @@ exports.getUser = async (req, res) => {
   }
 };
 exports.putUser = async (req, res) => {
-  const exists = await user.findOne({ email: req.user.email });
+  const exists = await User.findOne({ email: req.user.email });
   if (exists) {
-    await user.findByIdAndUpdate(exists._id, req.body, error => {
+    let location = await new Location({
+      city: req.body.city || '',
+      state: req.body.state || '',
+      country: req.body.country || ''
+    }).save();
+    await User.findByIdAndUpdate(exists._id, { location, ...req.body }, error => {
       if (error) return res.send(error);
       return res.send({
         user: exists._id,
@@ -34,9 +40,9 @@ exports.putUser = async (req, res) => {
   }
 };
 exports.deleteUser = async (req, res) => {
-  const exists = await user.findOne({ email: req.user.email });
+  const exists = await User.findOne({ email: req.user.email });
   if (exists) {
-    await user.findByIdAndDelete(exists._id, error => {
+    await User.findByIdAndDelete(exists._id, error => {
       if (error) throw error;
       return res.send({
         user: exists._id,
@@ -47,7 +53,7 @@ exports.deleteUser = async (req, res) => {
 };
 
 exports.getFollowers = async (req, res) => {
-  const exists = await user.findById(req.user._id).populate('followers');
+  const exists = await User.findById(req.user._id).populate('followers');
   if (exists) {
     res.status(200).send(exists.followers || []); // Send followers or empty array if none found
   } else {
@@ -60,7 +66,7 @@ exports.getFollowers = async (req, res) => {
   }
 };
 exports.getFollowing = async (req, res) => {
-  const exists = await user.findById(req.user._id).populate('following');
+  const exists = await User.findById(req.user._id).populate('following');
   if (exists) {
     res.status(200).send(exists.following || []); // Send followers or empty array if none found
   } else {
@@ -75,7 +81,7 @@ exports.getFollowing = async (req, res) => {
 };
 exports.followUser = async (req, res) => {
   // Check if this user exists
-  let userExists = await user.findById(req.user._id);
+  let userExists = await User.findById(req.user._id);
   if (!userExists) {
     return res.status(404).send({
       error: {
@@ -107,7 +113,7 @@ exports.followUser = async (req, res) => {
     });
   }
   // Check if user to follow exists
-  let userToFollow = await user.findById(req.body.id);
+  let userToFollow = await User.findById(req.body.id);
   if (!userToFollow) {
     return res.status(404).send({
       error: {
@@ -133,7 +139,7 @@ exports.followUser = async (req, res) => {
 };
 exports.unfollowUser = async (req, res) => {
   // confirm this user exists
-  let userExists = await user.findById(req.user._id);
+  let userExists = await User.findById(req.user._id);
   if (!userExists) {
     return res.status(404).send({
       error: {
@@ -165,7 +171,7 @@ exports.unfollowUser = async (req, res) => {
     });
   }
   // Check if user to unfollow exists
-  let userToUnfollow = await user.findById(req.body.id);
+  let userToUnfollow = await User.findById(req.body.id);
   if (!userToUnfollow) {
     return res.status(404).send({
       error: {
@@ -176,9 +182,9 @@ exports.unfollowUser = async (req, res) => {
     });
   }
   // remove this user from user to unfollow's followers
-  await user.findByIdAndUpdate(userToUnfollow._id, { $pull: { followers: req.user._id } });
+  await User.findByIdAndUpdate(userToUnfollow._id, { $pull: { followers: req.user._id } });
   // remove user to unfollow from this user's following
-  await user.findByIdAndUpdate(userExists._id, { $pull: { following: req.body.id } });
+  await User.findByIdAndUpdate(userExists._id, { $pull: { following: req.body.id } });
 
   res.send({
     success: {
