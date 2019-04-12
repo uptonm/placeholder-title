@@ -7,8 +7,8 @@ const helmet = require('helmet');
 const cors = require('cors');
 require('dotenv').config();
 
-
 require('./models/user');
+require('./models/location');
 require('./models/post');
 require('./services/jwtAuth');
 
@@ -24,11 +24,7 @@ app.use('/api', require('./routes/test.routes'));
 
 app.use('/auth', require('./routes/auth.routes'));
 app.use('/api', passport.authenticate('jwt', { session: false }), require('./routes/user.routes'));
-app.use(
-  '/api',
-  passport.authenticate('jwt', { session: false }),
-  require('./routes/post.routes')
-);
+app.use('/api', passport.authenticate('jwt', { session: false }), require('./routes/post.routes'));
 
 //Handle errors
 // eslint-disable-next-line no-unused-vars
