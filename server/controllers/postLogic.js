@@ -50,9 +50,22 @@ exports.postPost = async (req, res) => {
       }
     });
   }
+  
   // check response fields for valid model
-  let response = await new Post({ author: req.user._id, ...req.body }).save();
+  if (!req.body.title || !req.body.body) {
+    const missingTitle = req.body.title ? '' : 'Error: post title is missing ';
+    const missingBody = req.body.body ? '' : 'Error: post body is missing';
+
+    return res.status(404).send({
+      Error: {
+        status: 404,
+        message: missingTitle + missingBody
+      }
+    })
+  }
+
   // create and save post response
+  let response = await new Post({ author: req.user._id, type: 'Origin', ...req.body }).save();
 
   // append post id to user's posts array
   exists.posts.push(response._id);
