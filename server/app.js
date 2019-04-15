@@ -10,6 +10,7 @@ require('dotenv').config();
 require('./models/user');
 require('./models/location');
 require('./models/post');
+require('./models/comment');
 require('./services/jwtAuth');
 
 const app = express();

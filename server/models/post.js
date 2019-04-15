@@ -22,6 +22,12 @@ const PostSchema = new Schema({
       ref: 'User'
     }
   ],
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Comment'
+    }
+  ],
   poster: {
     // Either then original poster or the reposter
     type: mongoose.Schema.Types.ObjectId,
