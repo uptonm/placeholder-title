@@ -2,6 +2,8 @@ language: node_js
 node_js:
   - 'node'
 script:
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./travis/run_on_pull_requests; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./travis/run_on_non_pull_requests; fi'
   - npm run lint
   - npm run test
 notifications:
