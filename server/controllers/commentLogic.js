@@ -19,7 +19,6 @@ exports.getPostComments = async (req, res) => {
   }
   // Populate the documents from the post parameter
 };
-// Get all comments from a user
 // Add a comment
 // Edit a comment
 // Delete a comment
