@@ -8,17 +8,22 @@ const PostSchema = new Schema({
     ref: 'User'
   },
   body: String,
-  type: String, // Either 'Original' or 'Repost'
+  type: String, // Either 'original' or 'repost'
   date: { type: Date, default: Date.now },
-  reposts: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  likes: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  poster: { // Either then original poster or the reposter
+  reposts: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
+  poster: {
+    // Either then original poster or the reposter
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }

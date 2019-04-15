@@ -12,17 +12,11 @@ exports.getPost = async (req, res) => {
       select: ['email', 'first', 'last']
     });
   } else if (req.query.userId) {
-    // Gets all posts by user Id
-    await Post.find({}, (err, posts) => {
-      let userPosts = [];
-
-      posts.forEach(post => {
-        if (JSON.stringify(post.author._id).replace(/"/g, '') === req.query.userId) {
-          userPosts.push(post);
-        }
-      });
-      response = userPosts;
-    });
+    // Confirm user exists
+    const exists = await User.findById(req.query.userId).populate('posts');
+    if (exists) {
+      response = await exists.posts;
+    }
   } else {
     // Gets all posts
     response = await Post.find({}).populate({ path: 'author', select: ['email', 'first', 'last'] });
@@ -50,7 +44,7 @@ exports.postPost = async (req, res) => {
       }
     });
   }
-  
+
   // check response fields for valid model
   if (!req.body.title || !req.body.body) {
     const missingTitle = req.body.title ? '' : 'Error: post title is missing ';
@@ -61,11 +55,11 @@ exports.postPost = async (req, res) => {
         status: 404,
         message: missingTitle + missingBody
       }
-    })
+    });
   }
 
   // create and save post response
-  let response = await new Post({ author: req.user._id, type: 'Origin', ...req.body }).save();
+  let response = await new Post({ author: req.user._id, type: 'original', ...req.body }).save();
 
   // append post id to user's posts array
   exists.posts.push(response._id);
