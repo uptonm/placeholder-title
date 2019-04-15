@@ -20,10 +20,10 @@ mongoose.connect(
   }
 );
 
-app.listen(process.env.PORT || 8000, () => {
+const httpServer = app.listen(process.env.PORT || 8000, () => {
   if (process.env.NODE_ENV !== 'test') {
     return log.msg(`Server listening on port ${colors.blue(process.env.PORT || 8000)}`);
   }
 });
 
-module.exports = app;
+module.exports = { app, httpServer };
