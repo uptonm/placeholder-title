@@ -1,7 +1,7 @@
 <h2 align="center">placeholder-title</h2>
 <p align="center">
-  <a href="https://codecov.io/gh/uptonm/placeholder-title">
-    <img src="https://codecov.io/gh/uptonm/placeholder-title/branch/master/graph/badge.svg" />
+  <a href="https://codecov.io/gh/placeholdertitle/placeholder-title-api">
+    <img src="https://codecov.io/gh/placeholdertitle/placeholder-title-api/branch/master/graph/badge.svg" />
   </a>
   <a href="https://travis-ci.org/uptonm/placeholder-title">
     <img src="https://travis-ci.org/uptonm/placeholder-title.svg?branch=master">
