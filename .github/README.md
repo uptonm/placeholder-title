@@ -3,8 +3,8 @@
   <a href="https://codecov.io/gh/placeholdertitle/placeholder-title-api">
     <img src="https://codecov.io/gh/placeholdertitle/placeholder-title-api/branch/master/graph/badge.svg" />
   </a>
-  <a href="https://travis-ci.org/uptonm/placeholder-title">
-    <img src="https://travis-ci.org/uptonm/placeholder-title.svg?branch=master">
+  <a href="https://travis-ci.org/placeholdertitle/placeholder-title">
+    <img src="https://travis-ci.org/placeholdertitle/placeholder-title-api.svg?branch=master">
   </a>
   <a href="https://greenkeeper.io/">
     <img src="https://badges.greenkeeper.io/uptonm/placeholder-title.svg">
