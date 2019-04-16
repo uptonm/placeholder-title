@@ -3,5 +3,6 @@
   "testMatch": ["**/test/**/*.js"],
   "rootDir": "./server",
   "coverageDirectory": "./coverage/",
+  "coveragePathIgnorePatterns": ["loggerService.js"],
   "collectCoverage": true
 }
