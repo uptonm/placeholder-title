@@ -18,6 +18,8 @@ beforeAll(async () => {
     .post('/auth/login')
     .send(test_user);
   token = response.body.token;
+  const user = await User.findOne({ email: test_user.email });
+  test_user = { id: user._id, ...test_user };
 });
 
 afterAll(async () => {
@@ -206,6 +208,82 @@ describe('DELETE /api/user/following', () => {
   });
 });
 
+describe('GET /api/posts', () => {
+  // token not being sent - should respond with a 401 - Forbidden
+  test('It should require authorization', () => {
+    return request(app)
+      .get('/api/posts')
+      .then(response => {
+        expect(response.statusCode).toBe(401);
+      });
+  });
+  // send the token - should respond with a 200 - OK
+  test('It gets posts', () => {
+    return request(app)
+      .get('/api/posts')
+      .set('Authorization', `Bearer ${token}`)
+      .then(response => {
+        expect(response.statusCode).toBe(200);
+        expect(response.type).toBe('application/json');
+      });
+  });
+});
+
+describe('POST /api/posts', () => {
+  // token not being sent - should respond with a 401 - Forbidden
+  test('It should require authorization', () => {
+    return request(app)
+      .post('/api/posts')
+      .then(response => {
+        expect(response.statusCode).toBe(401);
+      });
+  });
+  let postId = '';
+  // send the token - should respond with a 200 - OK
+  test('It creates a post', () => {
+    return request(app)
+      .post('/api/posts')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ title: 'Test', body: 'Test' })
+      .then(response => {
+        expect(response.statusCode).toBe(200);
+        expect(response.type).toBe('application/json');
+        postId = response.body._id;
+      });
+  });
+
+  test('It gets a particular post', () => {
+    return request(app)
+      .get(`/api/posts?postId=${postId}`)
+      .set('Authorization', `Bearer ${token}`)
+      .then(response => {
+        expect(response.statusCode).toBe(200);
+        expect(response.type).toBe('application/json');
+      });
+  });
+
+  test('It gets a users posts', () => {
+    return request(app)
+      .get(`/api/posts?userId=${test_user.id}`)
+      .set('Authorization', `Bearer ${token}`)
+      .then(response => {
+        expect(response.statusCode).toBe(200);
+        expect(response.type).toBe('application/json');
+      });
+  });
+
+  test('It gets a posts comments', () => {
+    return request(app)
+      .get(`/api/posts/${postId}/comments`)
+      .set('Authorization', `Bearer ${token}`)
+      .then(response => {
+        expect(response.statusCode).toBe(404);
+        expect(response.type).toBe('application/json');
+      });
+  });
+});
+
+// *DO LAST* - DELETES USER WHICH DEACTIVATES JWT TOKEN
 describe('DELETE /api/user', () => {
   // token not being sent - should respond with a 401 - Forbidden
   test('It should require authorization', () => {
