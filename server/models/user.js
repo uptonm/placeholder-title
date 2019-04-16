@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const { LocationSchema } = require('./location');
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
@@ -14,18 +15,29 @@ const UserSchema = new Schema({
   },
   first: String,
   last: String,
-  posts: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Post'
-  }],
-  following: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }],
-  followers: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }]
+  bio: String,
+  location: LocationSchema,
+  education: String,
+  avatar: String,
+  username: String,
+  posts: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Post'
+    }
+  ],
+  following: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
+  followers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ]
 });
 
 UserSchema.pre('save', async function(next) {
@@ -55,6 +67,6 @@ UserSchema.methods.isValidPassword = async function(password) {
   return compare;
 };
 
-const UserModel = mongoose.model('User', UserSchema, 'users');
+const UserModel = mongoose.model('User', UserSchema);
 
 module.exports = UserModel;

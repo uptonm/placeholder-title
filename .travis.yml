@@ -3,7 +3,6 @@ node_js:
   - 'node'
 script:
   - npm run lint
-  - npm run test:cover
-after_success: npm run cover
+  - npm run test
 notifications:
   slack: placeholder-title:K92fuxQmgZdNXbRhpTXaFwlv

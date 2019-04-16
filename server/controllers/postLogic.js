@@ -4,12 +4,27 @@ const User = mongoose.model('User');
 
 exports.getPost = async (req, res) => {
   let response;
-  if (req.params.id) {
-    response = await Post.findById(req.params.id).populate({
+
+  if (req.query.postId) {
+    // Gets post by post Id
+    response = await Post.findById(req.query.postId).populate({
       path: 'author',
       select: ['email', 'first', 'last']
     });
+  } else if (req.query.userId) {
+    // Gets all posts by user Id
+    await Post.find({}, (err, posts) => {
+      let userPosts = [];
+
+      posts.forEach(post => {
+        if (JSON.stringify(post.author._id).replace(/"/g, '') === req.query.userId) {
+          userPosts.push(post);
+        }
+      });
+      response = userPosts;
+    });
   } else {
+    // Gets all posts
     response = await Post.find({}).populate({ path: 'author', select: ['email', 'first', 'last'] });
   }
 
@@ -17,7 +32,7 @@ exports.getPost = async (req, res) => {
     return res.status(404).send({
       Error: {
         status: 404,
-        message: `${req.params.id ? 'Post not found' : 'No posts were found'}`
+        message: `${req.query.postId ? 'Post not found' : 'No posts were found'}`
       }
     });
   }
