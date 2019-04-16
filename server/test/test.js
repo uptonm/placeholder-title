@@ -190,6 +190,24 @@ describe('DELETE /api/user/following', () => {
         expect(response.statusCode).toBe(401);
       });
   });
+
+  test('It requires an id field', () => {
+    return request(app)
+      .delete('/api/user/following')
+      .set('Authorization', `Bearer ${token}`)
+      .send({})
+      .then(response => {
+        expect(response.statusCode).toBe(400);
+        expect(response.type).toBe('application/json');
+        expect(response.body).toEqual({
+          error: {
+            message: 'This route requires an id field',
+            status: 400
+          }
+        });
+      });
+  });
+
   test('It unfollows the user', () => {
     return request(app)
       .delete('/api/user/following')
@@ -202,6 +220,23 @@ describe('DELETE /api/user/following', () => {
           success: {
             message: `User ${id_following} unfollowed`,
             status: 200
+          }
+        });
+      });
+  });
+
+  test('User isnt following', () => {
+    return request(app)
+      .delete('/api/user/following')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ id: id_following })
+      .then(response => {
+        expect(response.statusCode).toBe(400);
+        expect(response.type).toBe('application/json');
+        expect(response.body).toEqual({
+          error: {
+            status: 400,
+            message: 'You are not following this user'
           }
         });
       });
