@@ -5,7 +5,7 @@ const Post = mongoose.model('Post');
 // Get all comments from a post
 exports.getPostComments = async (req, res) => {
   // Check that post exists
-  const { postId } = req.params;
+  const { postId } = req.query;
   const exists = await Post.findById(postId).populate('Comment');
   if (exists) {
     return res.status(200).send(exists.comments);
