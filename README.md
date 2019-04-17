@@ -67,7 +67,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-<table><tr><td align="center"><a href="https://github.com/ShawnToubeau"><img src="https://avatars1.githubusercontent.com/u/22332636?v=4" width="100px;" alt="Shawn Toubeau"/><br /><sub><b>Shawn Toubeau</b></sub></a><br /><a href="https://github.com/placeholdertitle/placeholder-title-api/commits?author=ShawnToubeau" title="Code">💻</a> <a href="#ideas-ShawnToubeau" title="Ideas, Planning, & Feedback">🤔</a></td></tr></table>
+<table><tr><td align="center"><a href="https://github.com/ShawnToubeau"><img src="https://avatars1.githubusercontent.com/u/22332636?v=4" width="100px;" alt="Shawn Toubeau"/><br /><sub><b>Shawn Toubeau</b></sub></a><br /><a href="https://github.com/placeholdertitle/placeholder-title-api/commits?author=ShawnToubeau" title="Code">💻</a> <a href="#ideas-ShawnToubeau" title="Ideas, Planning, & Feedback">🤔</a></td><td align="center"><a href="https://github.com/SaturnoJ"><img src="https://avatars2.githubusercontent.com/u/34634077?v=4" width="100px;" alt="Jason Saturno"/><br /><sub><b>Jason Saturno</b></sub></a><br /><a href="#ideas-SaturnoJ" title="Ideas, Planning, & Feedback">🤔</a></td></tr></table>
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
