@@ -1,4 +1,5 @@
 <h2 align="center">placeholder-title</h2>
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 <p align="center">
   <a href="https://codecov.io/gh/placeholdertitle/placeholder-title-api">
     <img src="https://codecov.io/gh/placeholdertitle/placeholder-title-api/branch/master/graph/badge.svg" />
@@ -57,3 +58,15 @@ JWT_SECRET = xxxxx; // (random string of letters and characters for hashing)
 
 
 
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+<table><tr><td align="center"><a href="https://github.com/ShawnToubeau"><img src="https://avatars1.githubusercontent.com/u/22332636?v=4" width="100px;" alt="Shawn Toubeau"/><br /><sub><b>Shawn Toubeau</b></sub></a><br /><a href="https://github.com/placeholdertitle/placeholder-title-api/commits?author=ShawnToubeau" title="Code">💻</a> <a href="#ideas-ShawnToubeau" title="Ideas, Planning, & Feedback">🤔</a></td></tr></table>
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
