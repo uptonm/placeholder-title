@@ -1,5 +1,4 @@
 <h2 align="center">placeholder-title</h2>
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 <p align="center">
   <a href="https://codecov.io/gh/placeholdertitle/placeholder-title-api">
     <img src="https://codecov.io/gh/placeholdertitle/placeholder-title-api/branch/master/graph/badge.svg" />
@@ -12,6 +11,9 @@
   </a>
   <a href="https://github.com/prettier/prettier">
    <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg" />
+  </a>
+  <a href="https://allcontributors.org/">
+    <img src="https://img.shields.io/badge/all_contributors-1-orange.svg" />
   </a>
   <br/>
 </p>
