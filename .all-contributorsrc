@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "ShawnToubeau",
+      "name": "Shawn Toubeau",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/22332636?v=4",
+      "profile": "https://github.com/ShawnToubeau",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "placeholder-title-api",
+  "projectOwner": "placeholdertitle",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}
