@@ -1,6 +1,7 @@
 const request = require('supertest');
 const mongoose = require('mongoose');
 const User = require('../models/user');
+const Post = require('../models/post');
 const { app, httpServer } = require('..');
 
 let token;
@@ -328,6 +329,18 @@ describe('DELETE /api/user', () => {
         expect(response.statusCode).toBe(401);
       });
   });
+  let postId;
+  test('It allows the user to make a post', () => {
+    return request(app)
+      .post('/api/posts')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ title: 'SAMPLE POST 123', body: 'DELETE ME' })
+      .then(response => {
+        expect(response.statusCode).toBe(200);
+        expect(response.type).toBe('application/json');
+        postId = response.body._id;
+      });
+  });
   // send the token - should respond with a 200 - OK
   test('It responds with JSON', () => {
     return request(app)
@@ -337,6 +350,24 @@ describe('DELETE /api/user', () => {
         expect(response.statusCode).toBe(200);
         expect(response.type).toBe('application/json');
         expect(response.body.message).toEqual('Deleted');
+      });
+  });
+
+  test('It removed the users post', async () => {
+    const exists = await Post.findById(postId);
+    expect(exists).toBeFalsy();
+  });
+
+  test('It removed the user', () => {
+    return request(app)
+      .get('/api/user')
+      .set('Authorization', `Bearer ${token}`)
+      .then(response => {
+        expect(response.statusCode).toBe(404);
+        expect(response.type).toBe('application/json');
+        expect(response.body.error).toEqual({
+          message: 'Couldn\'t find your profile. Try again later.'
+        });
       });
   });
 });
