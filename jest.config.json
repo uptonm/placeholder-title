@@ -1,6 +1,8 @@
 {
+  "testEnvironment": "node",
   "testMatch": ["**/test/**/*.js"],
   "rootDir": "./server",
   "coverageDirectory": "./coverage/",
+  "coveragePathIgnorePatterns": ["loggerService.js", "index.js", "authLogic.js", "jwtAuth.js"],
   "collectCoverage": true
 }

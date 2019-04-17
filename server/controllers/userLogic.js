@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const Post = mongoose.model('Post');
 const Location = mongoose.model('Location');
 
 exports.getUser = async (req, res) => {
@@ -42,8 +43,11 @@ exports.putUser = async (req, res) => {
 exports.deleteUser = async (req, res) => {
   const exists = await User.findOne({ email: req.user.email });
   if (exists) {
-    await User.findByIdAndDelete(exists._id, error => {
+    await User.findByIdAndDelete(exists._id, async (error, response) => {
       if (error) throw error;
+      await Post.deleteMany({_id: { $in: response.posts }}, (error) => {
+        if(error) throw error;
+      });
       return res.send({
         user: exists._id,
         message: 'Deleted'
@@ -51,7 +55,6 @@ exports.deleteUser = async (req, res) => {
     });
   }
 };
-
 exports.getFollowers = async (req, res) => {
   const exists = await User.findById(req.user._id).populate('followers');
   if (exists) {
