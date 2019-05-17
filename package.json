@@ -27,7 +27,7 @@
     "cors": "^2.8.5",
     "dotenv": "^7.0.0",
     "eslint": "^5.15.1",
-    "express": "^4.16.4",
+    "express": "^4.17.0",
     "express-graceful-shutdown": "^1.0.0",
     "helmet": "^3.16.0",
     "jest": "^24.7.1",
