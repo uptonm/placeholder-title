@@ -1,20 +1,17 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const PostSchema = new Schema({
-  title: String,
+const repostSchema = new Schema({
+  post: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post'
+  },
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
   body: String,
   date: { type: Date, default: Date.now },
-  reposts: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Repost'
-    }
-  ],
   likes: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -29,6 +26,6 @@ const PostSchema = new Schema({
   ]
 });
 
-const Post = mongoose.model('Post', PostSchema);
+const Repost = mongoose.model('Repost', repostSchema);
 
-module.exports = Post;
+module.exports = Repost;
