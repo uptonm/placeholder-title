@@ -176,7 +176,9 @@ describe('PUT /api/user/following', () => {
       });
   });
   test('Other user gets follower', async () => {
-    const followedUser = await User.findOne({ email: test_user2.email }).populate('followers');
+    const followedUser = await User.findOne({
+      email: test_user2.email
+    }).populate('followers');
     expect(followedUser.followers.length).toEqual(1);
     expect(followedUser.followers[0].email).toEqual(test_user.email);
   });
@@ -244,27 +246,6 @@ describe('DELETE /api/user/following', () => {
   });
 });
 
-describe('GET /api/posts', () => {
-  // token not being sent - should respond with a 401 - Forbidden
-  test('It should require authorization', () => {
-    return request(app)
-      .get('/api/posts')
-      .then(response => {
-        expect(response.statusCode).toBe(401);
-      });
-  });
-  // send the token - should respond with a 200 - OK
-  test('It gets posts', () => {
-    return request(app)
-      .get('/api/posts')
-      .set('Authorization', `Bearer ${token}`)
-      .then(response => {
-        expect(response.statusCode).toBe(200);
-        expect(response.type).toBe('application/json');
-      });
-  });
-});
-
 describe('POST /api/posts', () => {
   // token not being sent - should respond with a 401 - Forbidden
   test('It should require authorization', () => {
@@ -286,6 +267,27 @@ describe('POST /api/posts', () => {
         expect(response.type).toBe('application/json');
         postId = response.body._id;
       });
+  });
+
+  describe('GET /api/posts', () => {
+    // token not being sent - should respond with a 401 - Forbidden
+    test('It should require authorization', () => {
+      return request(app)
+        .get('/api/posts')
+        .then(response => {
+          expect(response.statusCode).toBe(401);
+        });
+    });
+    // send the token - should respond with a 200 - OK
+    test('It gets posts', () => {
+      return request(app)
+        .get('/api/posts')
+        .set('Authorization', `Bearer ${token}`)
+        .then(response => {
+          expect(response.statusCode).toBe(200);
+          expect(response.type).toBe('application/json');
+        });
+    });
   });
 
   test('It gets a particular post', () => {
@@ -366,7 +368,7 @@ describe('DELETE /api/user', () => {
         expect(response.statusCode).toBe(404);
         expect(response.type).toBe('application/json');
         expect(response.body.error).toEqual({
-          message: 'Couldn\'t find your profile. Try again later.'
+          message: "Couldn't find your profile. Try again later."
         });
       });
   });
