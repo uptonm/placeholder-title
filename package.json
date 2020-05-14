@@ -40,6 +40,6 @@
     "supertest": "^4.0.2"
   },
   "devDependencies": {
-    "nodemon": "^1.18.10"
+    "nodemon": "^2.0.4"
   }
 }
